@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0; /* Black text color */
+  --background-start-rgb: 242, 242, 242; /* Ivory background color */
+  --background-end-rgb: 242, 242, 242; /* Ivory background color */
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: white) { /* CUSTOMISE TIP 💡 : Set the colour theme to dark or white to change the colours of the web page to be responsive to the theme */
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255; /* White text color */
+    --background-start-rgb: 28, 28, 28; /* Black background color */
+    --background-end-rgb: 28, 28, 28; /* Black background color */
   }
 }
 
