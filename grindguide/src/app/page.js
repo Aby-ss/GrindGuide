@@ -1,24 +1,25 @@
 import Image from "next/image";
+import graph from "../public/Graph.jpeg"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
       <h1 className="font-extrabold text-5xl lg:text-5xl tracking-tight md:-mb-4 text-center pt-5 text-balance">
-        <span className = "bg-rose-600 px-2 -rotate-1 inline-block"><span className = "text-white">Personalized Workout Plans</span></span>
+      Personalized <span className = "bg-rose-600 px-2 -rotate-1 inline-block"><span className = "text-white">Athletic </span></span>Workout Plans
         <br/> to Keep You on Track
       </h1>
 
-      <p className="font-bold text-2xl text-center w-[650px] text-[20px] leading-[24px] absolute top-[28%]">
-        Your Ultimate Fitness Companion: <span className = "underline decoration-rose-600 decoration-dashed underline-offset-4 text-2xl lg:text-2xl">Work Smarter, Not Harder</span>
-      </p>
-      
-      <button className="bg-blue-800 text-white font-semibold py-4 px-20 rounded-md mt-4 absolute top-[35%] transition-transform duration-300 hover:scale-105 hover:rotate-3" style={{ borderRadius: '10px' }}>
-        <a href="/new">Start Reflection</a>
-      </button>
+      <div className="font-medium absolute bottom-0 top-[30%]">
+        <ul className="list-none">
+          <li className="flex items-center text-lg"><span className="mr-2">💪🏼</span> Build Muscle </li>
+          <li className="flex items-center text-lg"><span className="mr-2">🏋🏻‍♂️</span> To Build Strength</li>
+          <li className="flex items-center text-lg"><span className="mr-2">🔋</span> To Build Power</li>
+        </ul>
+      </div>
 
       <h1 className="font-extrabold text-5xl lg:text-5xl tracking-tight text-center absolute top-[50%]">
-        Tired of <span className="bg-rose-600 px-2 rotate-1 inline-block"><span className="text-white">Bad Workout</span></span> progress ?
+        Sick of Hitting a <span className="decoration-rose-600 underline underline-offset-4 decoration-dashed underline-offset-10">Fitness Plateau</span>  ?
       </h1>
 
       <div className="flex space-x-4 mt-8 absolute top-[60%]">
@@ -39,6 +40,20 @@ export default function Home() {
             </ul>
           </div>
       </div>
+
+      <p className = "font-medium text-lg lg:text-xl tracking-tight md:-mb-4 text-center pt-5 text-balance absolute top-[95%]">
+        In today's era, we are made to believe the <span className="bg-rose-600 px-2 -rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">blocky and excessive</span></span> bodybuilder physique is the best for both asthetics and athletics, but that is far from truth, the best physique by far in terms of physical attraction and power/strength is the <span className="bg-lime-600 px-2 rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">athletic physique</span></span>
+      </p>
+
+      <div className="flex justify-center items-center min-h-screen absolute top-[100%]">
+      <Image
+        src={graph} // Path to your image file
+        alt="Description of the image"
+        width={500} // Set the desired width
+        height={300} // Set the desired height
+        className="rounded-lg shadow-lg" // Tailwind CSS classes for styling
+      />
+    </div>
     </main>
   );
 }
