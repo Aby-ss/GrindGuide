@@ -1,5 +1,4 @@
 import Image from "next/image";
-import graph from "../public/Graph.jpeg"
 
 export default function Main() {
   return (
@@ -44,16 +43,6 @@ export default function Main() {
       <p className = "font-medium text-lg lg:text-xl tracking-tight md:-mb-4 text-center pt-5 text-balance absolute top-[95%]">
         In today's era, we are made to believe the <span className="bg-rose-600 px-2 -rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">blocky and excessive</span></span> bodybuilder physique is the best for both asthetics and athletics, but that is far from truth, the best physique by far in terms of physical attraction and power/strength is the <span className="bg-lime-600 px-2 rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">athletic physique</span></span>
       </p>
-
-      <div className="flex justify-center items-center min-h-screen absolute top-[100%]">
-      <Image
-        src={graph} // Path to your image file
-        alt="Description of the image"
-        width={500} // Set the desired width
-        height={300} // Set the desired height
-        className="rounded-lg shadow-lg" // Tailwind CSS classes for styling
-      />
-    </div>
     </main>
   );
 }
