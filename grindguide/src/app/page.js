@@ -7,6 +7,8 @@ export default function Main() {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [selectedMartialArt, setSelectedMartialArt] = useState(null);
   const [selectedtrainingDays, setSelectedtrainingDays] = useState(null);
+  const [selectedsportDays, setSelectedsportDays] = useState(null);
+  const [selectedrestDays, setSelectedrestDays] = useState(null);
 
   const goalOptions = [
     { id: 1, label: "Bulk", icon: "💪🏼" },
@@ -23,6 +25,17 @@ export default function Main() {
   const trainingDaysOptions = [
     { id: 1, label: "4 days/week", icon: "4️⃣"},
     { id: 2, label: "6 days/week", icon: "6️⃣"}
+  ]
+
+  const sportingDaysOptions = [
+    { id: 1, label: "2 days/week", icon: "2️⃣"},
+    { id: 2, label: "3 days/week", icon: "3️⃣"}
+  ]
+
+  const restDaysOptions = [
+    { id: 1, label: "Friday", icon: "🌅"},
+    { id: 2, label: "Saturday", icon: "🌇"},
+    { id: 3, label: "Sunday", icon: "🏖️"}
   ]
 
   const renderQuestion = (questionText, options, selected, setSelected, top) => (
@@ -109,7 +122,7 @@ export default function Main() {
 
       {/* Question 2: Martial Art */}
       {renderQuestion(
-        "What additional martial art would you like to do?",
+        "What additional martial art/sport would you like to do?",
         martialArtOptions,
         selectedMartialArt,
         setSelectedMartialArt,
@@ -123,6 +136,24 @@ export default function Main() {
         selectedtrainingDays,
         setSelectedtrainingDays,
         "155%"
+      )}
+
+      {/* Question 4: Additional Sporting Days */}
+      {renderQuestion(
+        "How many days in a week would you like to train your additional sport?",
+        sportingDaysOptions,
+        selectedsportDays,
+        setSelectedsportDays,
+        "175%"
+      )}
+
+      {/* Question 5: Rest Days */}
+      {renderQuestion(
+        "Which day would you like to allocate for rest?",
+        restDaysOptions,
+        selectedrestDays,
+        setSelectedrestDays,
+        "195%"
       )}
     </main>
   );
