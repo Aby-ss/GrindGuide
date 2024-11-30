@@ -6,9 +6,9 @@ import { useState } from "react";
 export default function Main() {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [selectedMartialArt, setSelectedMartialArt] = useState(null);
-  const [selectedtrainingDays, setSelectedtrainingDays] = useState(null);
-  const [selectedsportDays, setSelectedsportDays] = useState(null);
-  const [selectedrestDays, setSelectedrestDays] = useState(null);
+  const [selectedTrainingDays, setSelectedTrainingDays] = useState(null);
+  const [selectedSportDays, setSelectedSportDays] = useState(null);
+  const [selectedRestDay, setSelectedRestDay] = useState(null);
 
   const goalOptions = [
     { id: 1, label: "Bulk", icon: "💪🏼" },
@@ -18,25 +18,25 @@ export default function Main() {
   const martialArtOptions = [
     { id: 1, label: "Boxing", icon: "🥊" },
     { id: 2, label: "Karate", icon: "🥋" },
-    { id: 3, label: "Muay Thai", icon: "🦵🏼"},
-    { id: 4, label: "Jiu Jitsu", icon: "🥷🏼"}
+    { id: 3, label: "Muay Thai", icon: "🦵🏼" },
+    { id: 4, label: "Jiu Jitsu", icon: "🥷🏼" },
   ];
 
   const trainingDaysOptions = [
-    { id: 1, label: "4 days/week", icon: "4️⃣"},
-    { id: 2, label: "6 days/week", icon: "6️⃣"}
-  ]
+    { id: 1, label: "4 days/week", value: 4, icon: "4️⃣" },
+    { id: 2, label: "6 days/week", value: 6, icon: "6️⃣" },
+  ];
 
   const sportingDaysOptions = [
-    { id: 1, label: "2 days/week", icon: "2️⃣"},
-    { id: 2, label: "3 days/week", icon: "3️⃣"}
-  ]
+    { id: 1, label: "2 days/week", value: 2, icon: "2️⃣" },
+    { id: 2, label: "3 days/week", value: 3, icon: "3️⃣" },
+  ];
 
   const restDaysOptions = [
-    { id: 1, label: "Friday", icon: "🌅"},
-    { id: 2, label: "Saturday", icon: "🌇"},
-    { id: 3, label: "Sunday", icon: "🏖️"}
-  ]
+    { id: 1, label: "Friday", icon: "🌅" },
+    { id: 2, label: "Saturday", icon: "🌇" },
+    { id: 3, label: "Sunday", icon: "🏖️" },
+  ];
 
   const renderQuestion = (questionText, options, selected, setSelected, top) => (
     <div style={{ position: "absolute", top }}>
@@ -67,6 +67,55 @@ export default function Main() {
       </div>
     </div>
   );
+
+  const generatePlan = () => {
+    const workoutDays =
+      trainingDaysOptions.find((option) => option.id === selectedTrainingDays)
+        ?.value || 0;
+    const sportDays =
+      sportingDaysOptions.find((option) => option.id === selectedSportDays)
+        ?.value || 0;
+    const restDay =
+      restDaysOptions.find((option) => option.id === selectedRestDay)?.label ||
+      "N/A";
+
+    const goal =
+      goalOptions.find((option) => option.id === selectedGoal)?.label || "N/A";
+    const martialArt =
+      martialArtOptions.find((option) => option.id === selectedMartialArt)
+        ?.label || "N/A";
+
+    const plan = [];
+    let remainingWorkoutDays = workoutDays;
+    let remainingSportDays = sportDays;
+
+    const daysOfWeek = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    daysOfWeek.forEach((day) => {
+      if (day === restDay) {
+        plan.push(`${day}: Rest`);
+      } else if (remainingWorkoutDays > 0) {
+        plan.push(`${day}: Weightlifting (${goal})`);
+        remainingWorkoutDays--;
+      } else if (remainingSportDays > 0) {
+        plan.push(`${day}: ${martialArt}`);
+        remainingSportDays--;
+      } else {
+        plan.push(`${day}: Flexible/Active Recovery`);
+      }
+    });
+
+    console.log("Weekly Plan:");
+    plan.forEach((line) => console.log(line));
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -111,7 +160,7 @@ export default function Main() {
         In today's era, we are made to believe the <span className="bg-rose-600 px-2 -rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">blocky and excessive</span></span> bodybuilder physique is the best for both asthetics and athletics, but that is far from truth, the best physique by far in terms of physical attraction and power/strength is the <span className="bg-lime-600 px-2 rotate-1 inline-block"><span className="text-white text-2xl lg:text-2xl">athletic physique</span></span>
       </p>
 
-      {/* Question 1: Physique Goal */}
+      {/* Existing UI Questions */}
       {renderQuestion(
         "Enter your physique goal:",
         goalOptions,
@@ -120,7 +169,6 @@ export default function Main() {
         "115%"
       )}
 
-      {/* Question 2: Martial Art */}
       {renderQuestion(
         "What additional martial art/sport would you like to do?",
         martialArtOptions,
@@ -128,33 +176,41 @@ export default function Main() {
         setSelectedMartialArt,
         "135%"
       )}
-
-      {/* Question 3: Training Intensity */}
+      
       {renderQuestion(
         "How many days in a week would you like to train/workout?",
         trainingDaysOptions,
-        selectedtrainingDays,
-        setSelectedtrainingDays,
+        selectedTrainingDays,
+        setSelectedTrainingDays,
         "155%"
       )}
-
-      {/* Question 4: Additional Sporting Days */}
+      
       {renderQuestion(
         "How many days in a week would you like to train your additional sport?",
         sportingDaysOptions,
-        selectedsportDays,
-        setSelectedsportDays,
+        selectedSportDays,
+        setSelectedSportDays,
         "175%"
       )}
-
-      {/* Question 5: Rest Days */}
+      
       {renderQuestion(
         "Which day would you like to allocate for rest?",
         restDaysOptions,
-        selectedrestDays,
-        setSelectedrestDays,
+        selectedRestDay,
+        setSelectedRestDay,
         "195%"
       )}
+
+      {/* Button to Generate Plan */}
+      <div className="absolute top-[215%]">
+        <button
+          onClick={generatePlan}
+          className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-all duration-200"
+        >
+          Generate Weekly Plan
+        </button>
+      </div>
+
     </main>
   );
 }
