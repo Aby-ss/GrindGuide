@@ -9,6 +9,7 @@ export default function Main() {
   const [selectedTrainingDays, setSelectedTrainingDays] = useState(null);
   const [selectedSportDays, setSelectedSportDays] = useState(null);
   const [selectedRestDay, setSelectedRestDay] = useState(null);
+  const [generatedPlan, setGeneratedPlan] = useState([]); // State for the workout plan
 
   const goalOptions = [
     { id: 1, label: "Bulk", icon: "💪🏼" },
@@ -23,8 +24,10 @@ export default function Main() {
   ];
 
   const trainingDaysOptions = [
-    { id: 1, label: "4 days/week", value: 4, icon: "4️⃣" },
-    { id: 2, label: "6 days/week", value: 6, icon: "6️⃣" },
+    { id: 1, label: "3 days/week", value: 3, icon: "3️⃣"},
+    { id: 2, label: "4 days/week", value: 4, icon: "4️⃣" },
+    { id: 3, label: "5 days/week", value: 5, icon: "5️⃣" },
+    { id: 4, label: "6 days/week", value: 6, icon: "6️⃣" },
   ];
 
   const sportingDaysOptions = [
@@ -109,13 +112,13 @@ export default function Main() {
         plan.push(`${day}: ${martialArt}`);
         remainingSportDays--;
       } else {
-        plan.push(`${day}: Flexible/Active Recovery`);
+        plan.push(`${day}: Rest`);
       }
     });
 
-    console.log("Weekly Plan:");
-    plan.forEach((line) => console.log(line));
+    setGeneratedPlan(plan); // Store the generated plan in the state
   };
+  
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -205,11 +208,25 @@ export default function Main() {
       <div className="absolute top-[215%]">
         <button
           onClick={generatePlan}
-          className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-all duration-200"
-        >
+          className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-all duration-200">
           Generate Weekly Plan
         </button>
       </div>
+
+
+      {/* Render the generated plan */}
+      {generatedPlan.length > 0 && (
+        <div className="mt-8 p-4 bg-gray-100 rounded-lg shadow-lg absolute top-[230%]">
+          <h2 className="text-xl font-semibold text-center mb-4">Your Weekly Workout Plan</h2>
+          <ul className="list-none space-y-2">
+            {generatedPlan.map((line, index) => (
+              <li key={index} className="text-lg font-medium">{line}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      
 
     </main>
   );
